@@ -5,7 +5,7 @@ import PropTypes from "prop-types"
 import { Link } from "gatsby"
 
 const HeaderStyle = styled.header`
-  background-color: ${Theme.color2};
+  background-color: #d9d9d9;
 `
 
 const Header = ({ siteTitle }) => (
