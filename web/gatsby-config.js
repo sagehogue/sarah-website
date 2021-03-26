@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `Sarah Hogue Art`,
+    title: `artbysarah`,
     description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
     author: `@Sage Hogue`,
   },
@@ -36,6 +36,21 @@ module.exports = {
         // a token with read permissions is required
         // if you have a private dataset
         token: process.env.MY_SANITY_TOKEN,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-prefetch-google-fonts`,
+      options: {
+        fonts: [
+          {
+            family: `Major Mono Display`,
+            variants: [`400`, `700`],
+          },
+          {
+            family: `Train One`,
+            variants: [`400`, `700`],
+          },
+        ],
       },
     },
     `gatsby-plugin-gatsby-cloud`,

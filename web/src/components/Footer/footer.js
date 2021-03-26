@@ -7,22 +7,32 @@ const Footer = styled.footer`
   background-color: ${Theme.color2};
   display: flex;
   min-height: 5vh;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   min-width: 100%;
 `
-const Link = styled.a`
+const LogoLink = styled.a`
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin-left: 1rem;
 `
+const EmailLink = styled.a`
+  display: flex;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: 1rem;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  color: rgb(4, 4, 4);
+  align-items: center;
+`
 
 export default function footer() {
   return (
     <Footer>
-      <Link href="https://www.instagram.com/artsarahtonin">
+      <LogoLink href="https://www.instagram.com/artsarahtonin" target="_blank">
         <StaticImage
           src={"./logo.png"}
           alt={"Sarah's instagram"}
@@ -31,7 +41,8 @@ export default function footer() {
           width={103}
           height={29}
         />
-      </Link>
+      </LogoLink>
+      <EmailLink href="mailto:artsarahtonin@email.com">Contact</EmailLink>
     </Footer>
   )
 }

@@ -6,7 +6,6 @@ import { Link } from "gatsby"
 
 const HeaderStyle = styled.header`
   background-color: ${Theme.color2};
-  letter-spacing: 5px;
 `
 
 const Header = ({ siteTitle }) => (
@@ -25,6 +24,10 @@ const Header = ({ siteTitle }) => (
             color: `white`,
             textDecoration: `none`,
             textTransform: "uppercase",
+            fontFamily: "Major Mono Display",
+            fontSize: "3rem",
+            letterSpacing: "15px",
+            fontWeight: 400,
           }}
         >
           {siteTitle}
