@@ -1,4 +1,5 @@
 import React from "react"
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import styled from "styled-components"
 // import Img from "gatsby-image"
 const width = 80
@@ -30,6 +31,9 @@ export default function Slideshow({
   currentSlide,
   images,
 }) {
+  console.log(currentSlide, images)
+  // data other than image data is inside node: i.e. name, description, instagramlink
+  // image to display: images.find(image => image.node.image.asset.fluid.srcWebp === currentSlide)
   return (
     <SlideshowFrame isActive={isActive}>
       {/* <img src={currentSlide} alt="Artwork by Sarah Hogue" /> */}
