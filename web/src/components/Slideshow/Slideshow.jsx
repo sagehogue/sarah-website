@@ -2,23 +2,34 @@ import React from "react"
 import styled from "styled-components"
 // import Img from "gatsby-image"
 const width = 80
-const height = 70
+const height = 80
+const mobileWidth = 85
+const mobileHeight = 85
 const SlideshowFrame = styled.div`
   position: fixed;
-  top: 50%;
-  left: 50%;
-  margin-top: -${height / 2}vh; /* Negative half of height. */
-  //   margin-left: -42.5vw; /* Negative half of width. */
+  // top: 12.5%;
+  // left: 12.5%;
+  left: 0;
+  right: 0;
+  top: 5vh;
+  margin: auto;
   height: ${height}vh;
   width: ${width}%;
-  left: auto;
-  right: auto;
+  background-color: whitesmoke;
   z-index: ${props => (props.isActive ? "5" : "-1")};
   opacity: ${props => (props.isActive ? "1" : "0")};
-  background-color: red;
+  @media screen and (max-width: 700px) {
+    height: ${mobileHeight}vh;
+    width: ${mobileWidth}%;
+  }
 `
 
-export default function Slideshow({ isActive, clickHandler, currentSlide }) {
+export default function Slideshow({
+  isActive,
+  clickHandler,
+  currentSlide,
+  images,
+}) {
   return (
     <SlideshowFrame isActive={isActive}>
       {/* <img src={currentSlide} alt="Artwork by Sarah Hogue" /> */}

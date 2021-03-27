@@ -26,6 +26,8 @@ const EmailLink = styled.a`
   text-transform: uppercase;
   font-size: 1.2rem;
   color: rgb(4, 4, 4);
+  text-decoration: none;
+  font-family: Josefin Sans;
   align-items: center;
 `
 

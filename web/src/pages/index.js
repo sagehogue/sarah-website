@@ -67,6 +67,11 @@ const GalleryHeader = styled.h2`
   letter-spacing: ${Theme.titleLetterSpacing};
   font-size: ${Theme.fontSizeXL};
   margin: 1rem;
+  @media screen and (max-width: 700px) {
+    font-size: ${Theme.mobileTitleFontSize};
+    letter-spacing: ${Theme.mobileTitleLetterSpacing};
+    font-weight: 700;
+  }
 `
 
 const IndexPage = ({ data }) => {
@@ -100,7 +105,7 @@ const IndexPage = ({ data }) => {
     setShowBackdrop(false)
   }
   const openSlideshow = e => {
-    console.log(e.target.key)
+    console.log(e.target.currentSrc)
     if (e.target.currentSrc) {
       setCurrentSlide(e.target.currentSrc)
       openBackdrop()
@@ -113,7 +118,7 @@ const IndexPage = ({ data }) => {
     setCurrentSlide(false)
   }
   return (
-    <Layout>
+    <Layout onClick={openSlideshow}>
       <SEO title="Home" />
       <UpperGrid>
         {topImageData.map(img => (
@@ -141,6 +146,7 @@ const IndexPage = ({ data }) => {
         currentSlide={currentSlide}
         isActive={showSlideshow}
         clickHandler={closeSlideshow}
+        images={[...bulkImages, ...topImageData]}
       />
     </Layout>
   )

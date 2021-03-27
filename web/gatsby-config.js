@@ -52,6 +52,10 @@ module.exports = {
               family: `Train One`,
               variants: [`400`, `700`],
             },
+            {
+              family: "Josefin Sans",
+              variants: ["400", "700"],
+            },
           ],
         },
       },

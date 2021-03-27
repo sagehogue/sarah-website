@@ -8,32 +8,35 @@ const HeaderStyle = styled.header`
   background-color: #d9d9d9;
 `
 
+const PaperBorder = styled.div`
+  margin: 0 auto;
+  max-width: 960px;
+  padding: 1.45rem 1.0875rem;
+`
+
+const PageTitleStyle = styled.h1`
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: "Major Mono Display";
+  font-size: ${Theme.fontSizeXL};
+  letter-spacing: ${Theme.titleLetterSpacing};
+  fontweight: 400;
+  margin: 0;
+  text-align: center;
+  @media screen and (max-width: 700px) {
+    font-size: ${Theme.mobileTitleFontSize};
+    letter-spacing: ${Theme.mobileTitleLetterSpacing};
+  }
+`
+
 const Header = ({ siteTitle }) => (
   <HeaderStyle>
-    <div
-      style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
-      }}
-    >
-      <h1 style={{ margin: 0, textAlign: "center" }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-            textTransform: "uppercase",
-            fontFamily: "Major Mono Display",
-            fontSize: "3.5rem",
-            letterSpacing: "15px",
-            fontWeight: 400,
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h1>
-    </div>
+    <PaperBorder>
+      <Link to="/" style={{ textDecoration: "none" }}>
+        <PageTitleStyle>{siteTitle}</PageTitleStyle>
+      </Link>
+    </PaperBorder>
   </HeaderStyle>
 )
 
