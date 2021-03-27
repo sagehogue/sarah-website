@@ -25,7 +25,7 @@ const Header = ({ siteTitle }) => (
             textDecoration: `none`,
             textTransform: "uppercase",
             fontFamily: "Major Mono Display",
-            fontSize: "3rem",
+            fontSize: "3.5rem",
             letterSpacing: "15px",
             fontWeight: 400,
           }}

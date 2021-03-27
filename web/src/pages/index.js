@@ -6,6 +6,7 @@ import Backdrop from "../components/Backdrop/Backdrop"
 import Layout from "../components/Layout/layout"
 import SEO from "../components/seo"
 import Img from "gatsby-image"
+import Theme from "../util/Theme"
 import Slideshow from "../components/Slideshow/Slideshow"
 
 const upperGap = "20px"
@@ -61,7 +62,11 @@ const FullGrid = styled.section`
 `
 
 const GalleryHeader = styled.h2`
-  font-family: "Train One";
+  font-family: "Major Mono Display";
+  text-align: center;
+  letter-spacing: ${Theme.titleLetterSpacing};
+  font-size: ${Theme.fontSizeXL};
+  margin: 1rem;
 `
 
 const IndexPage = ({ data }) => {
