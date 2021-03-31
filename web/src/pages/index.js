@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import styled from "styled-components"
 import { Link } from "gatsby"
 import { useStaticQuery, graphql } from "gatsby"
@@ -80,23 +80,49 @@ const IndexPage = ({ data }) => {
   const [currentSlide, setCurrentSlide] = useState(false)
   const [showSlideshow, setShowSlideshow] = useState(false)
   const [images, setImages] = useState([data.allSanityArtPiece.edges])
-
-  const bulkImages = data.allSanityArtPiece.edges.sort((img1, img2) => {
-    img1 = parseInt(img1.node.name.replace("IG-Pic-", ""))
-    img2 = parseInt(img2.node.name.replace("IG-Pic-", ""))
-    if (img1 > img2) {
-      return 1
-    } else if (img1 < img2) {
-      return -1
-    } else if (img1 === img2) {
-      return 0
-    }
-  })
-
-  const [topImageData, setTopImageData] = useState(
-    bulkImages.splice(-4, 4).reverse()
-  )
-  const [gridImageData, setGridImageData] = useState(bulkImages)
+  const [topImages, setTopImages] = useState([])
+  const [gridImages, setGridImages] = useState([])
+  let bulkImages
+  useEffect(() => {
+    bulkImages = [...images[0]]
+    bulkImages.sort((img1, img2) => {
+      img1 = parseInt(img1.node.name.replace("IG-Pic-", ""))
+      img2 = parseInt(img2.node.name.replace("IG-Pic-", ""))
+      if (img1 > img2) {
+        return 1
+      } else if (img1 < img2) {
+        return -1
+      } else if (img1 === img2) {
+        return 0
+      }
+    })
+    console.log(bulkImages)
+    setTopImages(
+      bulkImages
+        .splice(-4, 4)
+        .reverse()
+        .map(img => (
+          <Img
+            fluid={img.node.image.asset.fluid}
+            placeholder={"blurred"}
+            key={img.node.id}
+            objectFit={"cover"}
+          />
+        ))
+    )
+    setGridImages(
+      bulkImages
+        .reverse()
+        .map(img => (
+          <Img
+            fluid={img.node.image.asset.fluid}
+            placeholder={"blurred"}
+            key={img.node.id}
+            objectFit={"cover"}
+          />
+        ))
+    )
+  }, [images])
 
   const openBackdrop = () => {
     setShowBackdrop(true)
@@ -120,34 +146,16 @@ const IndexPage = ({ data }) => {
   return (
     <Layout onClick={openSlideshow}>
       <SEO title="Home" />
-      <UpperGrid>
-        {topImageData.map(img => (
-          <Img
-            fluid={img.node.image.asset.fluid}
-            placeholder={"blurred"}
-            key={img.node.id}
-            objectFit={"cover"}
-          />
-        ))}
-      </UpperGrid>
+      <UpperGrid>{topImages}</UpperGrid>
       <GalleryHeader>Gallery</GalleryHeader>
-      <FullGrid>
-        {bulkImages.reverse().map(img => (
-          <Img
-            fluid={img.node.image.asset.fluid}
-            placeholder={"blurred"}
-            key={img.node.id}
-            objectFit={"cover"}
-          />
-        ))}
-      </FullGrid>
+      <FullGrid>{gridImages}</FullGrid>
       <Backdrop isActive={showBackdrop} clickHandler={closeSlideshow} />
-      <Slideshow
+      {/* <Slideshow
         currentSlide={currentSlide}
         isActive={showSlideshow}
         clickHandler={closeSlideshow}
-        images={[...bulkImages, ...topImageData]}
-      />
+        images={images}
+      /> */}
     </Layout>
   )
 }
