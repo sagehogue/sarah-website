@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react"
 import styled from "styled-components"
-import { Link } from "gatsby"
-import { useStaticQuery, graphql } from "gatsby"
+import { Link, graphql } from "gatsby"
 import Backdrop from "../components/Backdrop/Backdrop"
 import Layout from "../components/Layout/layout"
 import SEO from "../components/seo"
@@ -79,12 +78,12 @@ const IndexPage = ({ data }) => {
   const [showBackdrop, setShowBackdrop] = useState(false)
   const [currentSlide, setCurrentSlide] = useState(false)
   const [showSlideshow, setShowSlideshow] = useState(false)
-  const [images, setImages] = useState([data.allSanityArtPiece.edges])
+  const [images, setImages] = useState(data.allSanityArtPiece.edges)
   const [topImages, setTopImages] = useState([])
   const [gridImages, setGridImages] = useState([])
   let bulkImages
   useEffect(() => {
-    bulkImages = [...images[0]]
+    bulkImages = [...images]
     bulkImages.sort((img1, img2) => {
       img1 = parseInt(img1.node.name.replace("IG-Pic-", ""))
       img2 = parseInt(img2.node.name.replace("IG-Pic-", ""))
@@ -96,7 +95,6 @@ const IndexPage = ({ data }) => {
         return 0
       }
     })
-    console.log(bulkImages)
     setTopImages(
       bulkImages
         .splice(-4, 4)
@@ -131,9 +129,13 @@ const IndexPage = ({ data }) => {
     setShowBackdrop(false)
   }
   const openSlideshow = e => {
-    console.log(e.target.currentSrc)
+    console.log(e.target)
     if (e.target.currentSrc) {
-      setCurrentSlide(e.target.currentSrc)
+      const imageData = images.find(
+        image => image.node.image.asset.fluid.srcWebp === e.target.currentSrc
+      )
+
+      setCurrentSlide(imageData)
       openBackdrop()
       setShowSlideshow(true)
     }
@@ -150,12 +152,12 @@ const IndexPage = ({ data }) => {
       <GalleryHeader>Gallery</GalleryHeader>
       <FullGrid>{gridImages}</FullGrid>
       <Backdrop isActive={showBackdrop} clickHandler={closeSlideshow} />
-      {/* <Slideshow
+      <Slideshow
         currentSlide={currentSlide}
         isActive={showSlideshow}
         clickHandler={closeSlideshow}
         images={images}
-      /> */}
+      />
     </Layout>
   )
 }

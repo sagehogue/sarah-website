@@ -7,7 +7,7 @@ const BackdropStyle = styled.div`
   left: 0;
   height: 100vh;
   width: 100vw;
-  background-color: rgba(4, 4, 4, 0.15);
+  background-color: rgba(4, 4, 4, 0.45);
   z-index: ${props => (props.isActive ? "3" : "-1")};
   display: ${props => (props.isActive ? "block" : "none")};
 `
