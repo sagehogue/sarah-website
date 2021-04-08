@@ -58,56 +58,15 @@ const SlideshowFrame = styled.div`
   }
 `
 
-export default function Slideshow({
-  isActive,
-  clickHandler,
-  currentSlide,
-  images,
-}) {
-  const data = useStaticQuery(graphql`
-    query MyQuery {
-      allSanityArtPiece(sort: { fields: name }) {
-        nodes {
-          image {
-            _key
-            _type
-            _rawAsset
-            _rawHotspot
-            _rawCrop
-            asset {
-              gatsbyImageData(formats: WEBP, placeholder: BLURRED)
-            }
-          }
-          name
-        }
-      }
-    }
-  `)
-  // data other than image data is inside node: i.e. name, description, instagramlink
-  // image to display: images.find(image => image.node.image.asset.fluid.srcWebp === currentSlide)
-  console.log(currentSlide)
-  // console.log(images[0])
-  const artPieceArray = data.allSanityArtPiece.nodes
-  console.log(artPieceArray)
-  // const imageData = artPieceArray.find(
-  //   image => image.image.asset.fluid.srcWebp === currentSlide
-  // )
-  // const imageData = images[0].find(
-  //   image => image.node.image.asset.fluid.srcWebp === currentSlide
-  // )
-  // const imageData = artPieceArray.find(
-  //   image => image.image.asset.fluid.srcWebp === currentSlide
-  // )
-  // console.log(imageData)
+export default function Slideshow({ isActive, currentSlide }) {
   return (
     <SlideshowFrame isActive={isActive}>
-      {/* <img src={currentSlide} alt="Artwork by Sarah Hogue" /> */}
-
       {currentSlide ? (
         <Img
           fluid={currentSlide.node.image.asset.fluid}
           placeholder={"blurred"}
           key={currentSlide.node.name}
+          alt="Collage by Sarah Hogue"
           // objectFit={"cover"}
         />
       ) : null}
