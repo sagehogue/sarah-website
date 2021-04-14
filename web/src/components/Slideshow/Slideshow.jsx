@@ -1,6 +1,9 @@
 import React from "react"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import { graphql, useStaticQuery } from "gatsby"
+import { Transition } from "react-transition-group"
+
+import Theme from "../../util/Theme"
 import Img from "gatsby-image"
 import styled from "styled-components"
 // import Img from "gatsby-image"
@@ -20,12 +23,11 @@ const SlideshowFrame = styled.div`
   // width: ${width}%;
   height: 650px;
   width: 650px;
-  // background-color: whitesmoke;
+  pointer-events: none;
   z-index: ${props => (props.isActive ? "5" : "-1")};
   opacity: ${props => (props.isActive ? "1" : "0")};
   & .gatsby-image-wrapper {
     min-height: 650px;
-    // margin: auto;
   }
   @media screen and (max-width: 700px) {
     top: 25vh;
@@ -60,16 +62,20 @@ const SlideshowFrame = styled.div`
 
 export default function Slideshow({ isActive, currentSlide }) {
   return (
-    <SlideshowFrame isActive={isActive}>
-      {currentSlide ? (
-        <Img
-          fluid={currentSlide.node.image.asset.fluid}
-          placeholder={"blurred"}
-          key={currentSlide.node.name}
-          alt="Collage by Sarah Hogue"
-          // objectFit={"cover"}
-        />
-      ) : null}
-    </SlideshowFrame>
+    <Transition in={isActive} timeout={Theme.animationDuration} unmountOnExit>
+      {animationState => {
+        return (
+          <SlideshowFrame animationState={animationState}>
+            <Img
+              fluid={currentSlide.node.image.asset.fluid}
+              placeholder={"blurred"}
+              key={currentSlide.node.name}
+              alt="Collage by Sarah Hogue"
+              // objectFit={"cover"}
+            />
+          </SlideshowFrame>
+        )
+      }}
+    </Transition>
   )
 }

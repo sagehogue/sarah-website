@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react"
 import styled from "styled-components"
 import { Link, graphql } from "gatsby"
+import { Transition } from "react-transition-group"
+
 import Backdrop from "../components/Backdrop/Backdrop"
 import Layout from "../components/Layout/layout"
 import SEO from "../components/seo"
@@ -131,12 +133,12 @@ const IndexPage = ({ data }) => {
   const openSlideshow = e => {
     console.log(e.target)
     if (e.target.currentSrc) {
+      openBackdrop()
       const imageData = images.find(
         image => image.node.image.asset.fluid.srcWebp === e.target.currentSrc
       )
 
       setCurrentSlide(imageData)
-      openBackdrop()
       setShowSlideshow(true)
     }
   }
@@ -147,6 +149,7 @@ const IndexPage = ({ data }) => {
   }
   return (
     <Layout onClick={openSlideshow}>
+      {/* <Transition></Transition> */}
       <SEO title="Home" />
       <UpperGrid>{topImages}</UpperGrid>
       <GalleryHeader>Gallery</GalleryHeader>
