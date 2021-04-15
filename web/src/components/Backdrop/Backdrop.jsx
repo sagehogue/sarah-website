@@ -16,7 +16,7 @@ const BackdropStyle = styled.div`
       : props.animState === "exited"
       ? "0"
       : props.animState === "entering"
-      ? "0"
+      ? "0.55"
       : props.animState === "exiting"
       ? "0"
       : "0.55"};
@@ -27,25 +27,23 @@ const BackdropStyle = styled.div`
       ? "rgb(4, 4, 4)"
       : "whitesmoke"};
   z-index: ${props =>
-    props.animState === "entered" ||
-    props.animState === "entering" ||
-    props.animState === "exiting"
+    props.animState === "entered" || props.animState === "entering"
       ? "3"
       : "-1"};
 `
 
 export default function Backdrop({ isActive, clickHandler }) {
-  const defaultStyle = {
-    transition: `transform 200ms, opacity 200ms ease`,
-    opacity: 1,
-  }
+  // const defaultStyle = {
+  //   transition: `transform 200ms, opacity 200ms ease`,
+  //   opacity: 1,
+  // }
 
-  const transitionStyles = {
-    entering: { opacity: 0, backgroundColor: "rgba(4, 4, 4, 0.55)", zIndex: 3 },
-    entered: { opacity: 1 },
-    exiting: {},
-    exited: { backgroundColor: "whitesmoke", zIndex: -1 },
-  }
+  // const transitionStyles = {
+  //   entering: { opacity: 0, backgroundColor: "rgba(4, 4, 4, 0.55)", zIndex: 3 },
+  //   entered: { opacity: 1 },
+  //   exiting: {},
+  //   exited: { backgroundColor: "whitesmoke", zIndex: -1 },
+  // }
 
   return (
     <Transition in={isActive} timeout={Theme.animationDuration} unmountOnExit>

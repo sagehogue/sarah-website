@@ -24,8 +24,14 @@ const SlideshowFrame = styled.div`
   height: 650px;
   width: 650px;
   pointer-events: none;
-  z-index: ${props => (props.isActive ? "5" : "-1")};
-  opacity: ${props => (props.isActive ? "1" : "0")};
+  z-index: ${props =>
+    props.animationState === "entered" || props.animationState === "entering"
+      ? "5"
+      : "-1"};
+  opacity: ${props =>
+    props.animationState === "entered" || props.animationState === "entering"
+      ? "1"
+      : "0"};
   & .gatsby-image-wrapper {
     min-height: 650px;
   }
@@ -64,17 +70,21 @@ export default function Slideshow({ isActive, currentSlide }) {
   return (
     <Transition in={isActive} timeout={Theme.animationDuration} unmountOnExit>
       {animationState => {
-        return (
-          <SlideshowFrame animationState={animationState}>
-            <Img
-              fluid={currentSlide.node.image.asset.fluid}
-              placeholder={"blurred"}
-              key={currentSlide.node.name}
-              alt="Collage by Sarah Hogue"
-              // objectFit={"cover"}
-            />
-          </SlideshowFrame>
-        )
+        try {
+          return (
+            <SlideshowFrame animationState={animationState}>
+              <Img
+                fluid={currentSlide.node.image.asset.fluid}
+                placeholder={"blurred"}
+                key={currentSlide.node.name}
+                alt="Collage by Sarah Hogue"
+                // objectFit={"cover"}
+              />
+            </SlideshowFrame>
+          )
+        } catch (err) {
+          console.log(err)
+        }
       }}
     </Transition>
   )
