@@ -46,7 +46,7 @@ export default function Backdrop({ isActive, clickHandler }) {
   // }
 
   return (
-    <Transition in={isActive} timeout={Theme.animationDuration} unmountOnExit>
+    <Transition in={isActive} timeout={Theme.animationDuration}>
       {animState => {
         console.log(animState)
         return <BackdropStyle animState={animState} onClick={clickHandler} />
