@@ -83,6 +83,7 @@ const IndexPage = ({ data }) => {
   const [images, setImages] = useState(false)
 
   useEffect(() => {
+    console.log(data)
     if (data) {
       setImages(data.allSanityArtPiece.edges)
     }
@@ -92,7 +93,7 @@ const IndexPage = ({ data }) => {
   const [gridImages, setGridImages] = useState([])
   let bulkImages
   useEffect(() => {
-    if (data) {
+    if (images) {
       bulkImages = [...images]
       bulkImages.sort((img1, img2) => {
         img1 = parseInt(img1.node.name.replace("IG-Pic-", ""))
