@@ -80,48 +80,57 @@ const IndexPage = ({ data }) => {
   const [showBackdrop, setShowBackdrop] = useState(false)
   const [currentSlide, setCurrentSlide] = useState(false)
   const [showSlideshow, setShowSlideshow] = useState(false)
-  const [images, setImages] = useState(data.allSanityArtPiece.edges)
+  const [images, setImages] = useState(false)
+
+  useEffect(() => {
+    if (data) {
+      setImages(data.allSanityArtPiece.edges)
+    }
+  }, [data])
+
   const [topImages, setTopImages] = useState([])
   const [gridImages, setGridImages] = useState([])
   let bulkImages
   useEffect(() => {
-    bulkImages = [...images]
-    bulkImages.sort((img1, img2) => {
-      img1 = parseInt(img1.node.name.replace("IG-Pic-", ""))
-      img2 = parseInt(img2.node.name.replace("IG-Pic-", ""))
-      if (img1 > img2) {
-        return 1
-      } else if (img1 < img2) {
-        return -1
-      } else if (img1 === img2) {
-        return 0
-      }
-    })
-    setTopImages(
-      bulkImages
-        .splice(-4, 4)
-        .reverse()
-        .map(img => (
-          <Img
-            fluid={img.node.image.asset.fluid}
-            placeholder={"blurred"}
-            key={img.node.id}
-            objectFit={"cover"}
-          />
-        ))
-    )
-    setGridImages(
-      bulkImages
-        .reverse()
-        .map(img => (
-          <Img
-            fluid={img.node.image.asset.fluid}
-            placeholder={"blurred"}
-            key={img.node.id}
-            objectFit={"cover"}
-          />
-        ))
-    )
+    if (data) {
+      bulkImages = [...images]
+      bulkImages.sort((img1, img2) => {
+        img1 = parseInt(img1.node.name.replace("IG-Pic-", ""))
+        img2 = parseInt(img2.node.name.replace("IG-Pic-", ""))
+        if (img1 > img2) {
+          return 1
+        } else if (img1 < img2) {
+          return -1
+        } else if (img1 === img2) {
+          return 0
+        }
+      })
+      setTopImages(
+        bulkImages
+          .splice(-4, 4)
+          .reverse()
+          .map(img => (
+            <Img
+              fluid={img.node.image.asset.fluid}
+              placeholder={"blurred"}
+              key={img.node.id}
+              objectFit={"cover"}
+            />
+          ))
+      )
+      setGridImages(
+        bulkImages
+          .reverse()
+          .map(img => (
+            <Img
+              fluid={img.node.image.asset.fluid}
+              placeholder={"blurred"}
+              key={img.node.id}
+              objectFit={"cover"}
+            />
+          ))
+      )
+    }
   }, [images])
 
   const openBackdrop = () => {
@@ -147,22 +156,26 @@ const IndexPage = ({ data }) => {
     setShowSlideshow(false)
     setCurrentSlide(false)
   }
-  return (
-    <Layout onClick={openSlideshow}>
-      {/* <Transition></Transition> */}
-      <SEO title="Home" />
-      <UpperGrid>{topImages}</UpperGrid>
-      <GalleryHeader>Gallery</GalleryHeader>
-      <FullGrid>{gridImages}</FullGrid>
-      <Backdrop isActive={showBackdrop} clickHandler={closeSlideshow} />
-      <Slideshow
-        currentSlide={currentSlide}
-        isActive={showSlideshow}
-        clickHandler={closeSlideshow}
-        images={images}
-      />
-    </Layout>
-  )
+  if (data) {
+    return (
+      <Layout onClick={openSlideshow}>
+        {/* <Transition></Transition> */}
+        <SEO title="Home" />
+        <UpperGrid>{topImages}</UpperGrid>
+        <GalleryHeader>Gallery</GalleryHeader>
+        <FullGrid>{gridImages}</FullGrid>
+        <Backdrop isActive={showBackdrop} clickHandler={closeSlideshow} />
+        <Slideshow
+          currentSlide={currentSlide}
+          isActive={showSlideshow}
+          clickHandler={closeSlideshow}
+          images={images}
+        />
+      </Layout>
+    )
+  } else {
+    return <div>Error!</div>
+  }
 }
 
 export const data = graphql`
