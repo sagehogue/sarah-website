@@ -6,12 +6,16 @@ import { Link } from "gatsby"
 
 const HeaderStyle = styled.header`
   background-color: #d9d9d9;
+  margin-bottom: 1rem;
 `
 
 const PaperBorder = styled.div`
   margin: 0 auto;
   max-width: 960px;
   padding: 1.45rem 1.0875rem;
+  @media screen and (max-width: 1000px) and (max-height: 450px) {
+    padding: 0.35rem;
+  }
 `
 
 const PageTitleStyle = styled.h1`
@@ -24,9 +28,16 @@ const PageTitleStyle = styled.h1`
   fontweight: 400;
   margin: 0;
   text-align: center;
+
   @media screen and (max-width: 700px) {
     font-size: ${Theme.mobileTitleFontSize};
     letter-spacing: ${Theme.mobileTitleLetterSpacing};
+  }
+  @media screen and (max-width: 1000px) and (max-height: 450px) {
+    font-size: ${Theme.mobileHorizontalTitleFontSize};
+    letter-spacing: ${Theme.mobileHorizontalTitleLetterSpacing};
+    // max-height: 5vh;
+    padding: 0;
   }
 `
 

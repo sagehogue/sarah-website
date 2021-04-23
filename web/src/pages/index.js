@@ -19,9 +19,9 @@ const UpperGrid = styled.section`
   grid-template-rows: 1fr 1fr 1fr;
   grid-template-columsn: 1fr 1fr 1fr 1fr;
   width: 100%;
-  min-height: 80vh;
-  margin-top: ${upperGap};
-  margin-bottom: ${upperGap};
+  min-height: 75vh;
+  // margin-top: ${upperGap};
+  // margin-bottom: ${upperGap};
   grid-gap: ${upperGap};
   & .gatsby-image-wrapper {
     background-image: cover;
@@ -56,6 +56,11 @@ const FullGrid = styled.section`
   grid-gap: ${lowerGap};
   margin-bottom: 2.5vh;
   @media screen and (max-width: 700px) {
+    grid-template-columns: repeat(auto-fit, minmax(150px, auto));
+    grid-auto-rows: 150px;
+    grid-gap: 10px;
+  }
+  @media screen and (max-width: 1000px) and (max-height: 450px) {
     grid-template-columns: repeat(auto-fit, minmax(150px, auto));
     grid-auto-rows: 150px;
     grid-gap: 10px;

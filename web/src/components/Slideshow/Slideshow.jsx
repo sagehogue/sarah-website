@@ -45,6 +45,7 @@ const SlideshowFrame = styled.div`
       // margin: auto;
     }
   }
+
   @media screen and (max-width: 600px) {
     top: 15vh;
   }
@@ -62,6 +63,37 @@ const SlideshowFrame = styled.div`
       min-height: ${mobileHeight}vw;
       // min-height: 500px;
       // margin: auto;
+    }
+  }
+  @media screen and (max-width: 1000px) and (max-height: 500px) {
+    top: 5vh;
+    height: 90vh;
+    width: 90vh;
+    & .gatsby-image-wrapper {
+      min-height: 450px;
+    }
+  }
+  @media screen and (max-width: 1000px) and (max-height: 450px) {
+    top: 5vh;
+    max-width: 90vh;
+    & .gatsby-image-wrapper {
+      max-height: 90vh;
+    }
+  }
+  @media screen and (max-width: 1000px) and (max-height: 400px) {
+    top: 5vh;
+    height: 90vh;
+    width: 90vh;
+    & .gatsby-image-wrapper {
+      min-height: 90vh;
+    }
+  }
+  @media screen and (max-width: 1000px) and (max-height: 360px) {
+    top: 5vh;
+    height: 324px;
+    width: 324px;
+    & .gatsby-image-wrapper {
+      min-height: 324px;
     }
   }
 `
